@@ -7,13 +7,15 @@
             "email": "capetrelluzzi@efil.fr"
         }
     ],
-    "autolaod": {
+    "autoload": {
         "psr-4": {
             "App\\": "app"
         }
     },
     "require": {
-        "slim/slim": "~2.0"
+        "slim/slim": "~2.0",
+        "webuni/front-matter": "^1.2",
+        "cebe/markdown": "^1.2"
     },
     "require-dev": {
         "symfony/var-dumper": "^5.2"
