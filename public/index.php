@@ -1,10 +1,12 @@
 <?php
-
-use Slim\Slim;
-
 require '../vendor/autoload.php';
 
+use App\Page;
+use Slim\Slim;
+
 define('CONTENT_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'content');
+define('VIEWS_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'ressources' . 'views');
+define('LAYOUTS_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'ressources' . DIRECTORY_SEPARATOR.  'views' . DIRECTORY_SEPARATOR . 'layouts');
 
 $app = new Slim(['debug' => true]);
 
@@ -13,11 +15,9 @@ $files = new RegexIterator($files, '/^.+\.yaml/i', RecursiveRegexIterator::GET_M
 
 foreach ($files as $file) {
     $file = $file[0];
-    $path = str_replace(CONTENT_PATH, '', $file);
-    $path = str_replace('.yaml', '', $path);
-    $path = str_replace('index', '', $path);
-    $app->any($path, function(){
-        echo "salut";
+    $page = new Page($file);
+    $app->any($page->getUrl(), function() use ($page){
+        $page->render();
     });
 }
 
