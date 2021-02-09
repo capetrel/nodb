@@ -1,0 +1,16 @@
+{
+    "name": "capetrel/bddless-site",
+    "description": "site with yaml file instead of database",
+    "authors": [
+        {
+            "name": "capetrel",
+            "email": "capetrelluzzi@efil.fr"
+        }
+    ],
+    "require": {
+        "slim/slim": "~2.0"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^5.2"
+    }
+}
