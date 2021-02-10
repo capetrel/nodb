@@ -1,0 +1,8 @@
+# Redirige le trafic vers le dossier public (simule le document_root du vhost)
+# La règle est basique et peu ne pas fonctinner partout préférer modifier le vhost
+# <IfModule mod_rewrite.c >
+#     RewriteEngine on
+#     RewriteCond %{HTTP_HOST} bddless-site\.test [NC]
+#     RewriteCond %{REQUEST_URI} ^/$
+#     RewriteRule ^(.*)$ /public/$1 [L]
+# </IfModule>
