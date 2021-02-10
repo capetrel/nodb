@@ -1,0 +1,83 @@
+@import "fonts";
+@import "variables";
+
+body, html {
+  margin:0;
+  padding: 0;
+}
+
+body {
+  font-family: LibreFranklin, sans-serif;
+  background-color: $white;
+  color: $text;
+}
+
+.container {
+  width: 100%;
+}
+
+.wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+nav {
+  background-color: $secondary-color;
+  .main-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:  ($space1 - 10) 0;
+    .logo {
+      width: 130px;
+      height: auto;
+      img {
+        width: 100%;
+      }
+    }
+
+    .menu {
+      font-weight: bold;
+      font-size: $size1 + 4px;
+      width: 40%;
+      display: flex;
+      list-style: none;
+      justify-content: space-between;
+      li {
+        color: $gray4;
+        cursor: pointer;
+        transition: color 0.2s ease-in-out;
+        :hover {
+          color: $main-color;
+        }
+      }
+    }
+  }
+}
+header {
+  background-color: $main-color;
+  .header {
+    padding: ($space1 * 2) 0;
+  }
+  h1 {
+    margin: 0;
+    padding: $space1 0;
+  }
+}
+.works {
+  display: flex;
+  justify-content: center;
+  margin: $space1 * 2 0;
+  .card {
+    background-color: $gray1;
+    border-radius: $radius;
+    margin: 0 $space1;
+    padding: $space1;
+  }
+}
+
+footer {
+  padding: $space1 * 3 0;
+  text-align: center;
+  color: $white;
+  background-color: $gray4;
+}

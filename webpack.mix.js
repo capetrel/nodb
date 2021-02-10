@@ -14,8 +14,10 @@ const mix = require('laravel-mix');
 mix.disableSuccessNotifications()
     .setResourceRoot('../')
     .setPublicPath('public')
-    .copyDirectory('ressources/fonts', 'public/fonts')
-    .js('ressources/js/main.js', 'js/main.js')
-    .sass('ressources/css/main.scss', 'css/main.css')
+    .copyDirectory('resources/fonts', 'public/fonts')
+    .js('resources/js/main.js', 'js/main.js')
+    .js('resources/js/test.js', 'js/test.js')
+    .sass('resources/css/main.scss', 'css/main.css')
+    .sass('resources/css/test.scss', 'css/test.css')
     .sourceMaps()
     .browserSync('http://bddless-site.test');

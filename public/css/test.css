@@ -1,0 +1,16 @@
+@font-face {
+  font-family: "LibreFranklin";
+  src: url(../fonts/LibreFranklin.ttf?79b6e141a9934744da5b4f422632a474) format("ttf supports variations"), url(../fonts/LibreFranklin.ttf?79b6e141a9934744da5b4f422632a474) format("ttf-variations");
+  font-weight: 100 1000;
+  font-stretch: 25% 151%;
+}
+@font-face {
+  font-family: "LibreFranklin Ital";
+  src: url(../fonts/LibreFranklin-Italic.ttf?f3b7261793fef130b4c0eff722fc1b26) format("ttf supports variations"), url(../fonts/LibreFranklin-Italic.ttf?f3b7261793fef130b4c0eff722fc1b26) format("ttf-variations");
+  font-weight: 100 1000;
+  font-stretch: 25% 151%;
+}
+.works .card:nth-child(2),
+.works .card:nth-child(4) {
+  background-color: #878787;
+}

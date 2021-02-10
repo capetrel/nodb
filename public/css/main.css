@@ -1,0 +1,94 @@
+@font-face {
+  font-family: "LibreFranklin";
+  src: url(../fonts/LibreFranklin.ttf?79b6e141a9934744da5b4f422632a474) format("ttf supports variations"), url(../fonts/LibreFranklin.ttf?79b6e141a9934744da5b4f422632a474) format("ttf-variations");
+  font-weight: 100 1000;
+  font-stretch: 25% 151%;
+}
+@font-face {
+  font-family: "LibreFranklin Ital";
+  src: url(../fonts/LibreFranklin-Italic.ttf?f3b7261793fef130b4c0eff722fc1b26) format("ttf supports variations"), url(../fonts/LibreFranklin-Italic.ttf?f3b7261793fef130b4c0eff722fc1b26) format("ttf-variations");
+  font-weight: 100 1000;
+  font-stretch: 25% 151%;
+}
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: LibreFranklin, sans-serif;
+  background-color: #FFFFEE;
+  color: #06071A;
+}
+
+.container {
+  width: 100%;
+}
+
+.wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+nav {
+  background-color: #3ecf8e;
+}
+nav .main-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+nav .main-navigation .logo {
+  width: 130px;
+  height: auto;
+}
+nav .main-navigation .logo img {
+  width: 100%;
+}
+nav .main-navigation .menu {
+  font-weight: bold;
+  font-size: 18px;
+  width: 40%;
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+}
+nav .main-navigation .menu li {
+  color: #2b354f;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+nav .main-navigation .menu li :hover {
+  color: #e87b1c;
+}
+
+header {
+  background-color: #e87b1c;
+}
+header .header {
+  padding: 40px 0;
+}
+header h1 {
+  margin: 0;
+  padding: 20px 0;
+}
+
+.works {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+}
+.works .card {
+  background-color: #f3f3f3;
+  border-radius: 8px;
+  margin: 0 20px;
+  padding: 20px;
+}
+
+footer {
+  padding: 60px 0;
+  text-align: center;
+  color: #FFFFEE;
+  background-color: #2b354f;
+}
