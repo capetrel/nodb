@@ -1,14 +1,17 @@
 <?php
 require '../vendor/autoload.php';
-
 use App\Page;
+use Dotenv\Dotenv;
 use Slim\Slim;
 
-define('CONTENT_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'content');
-define('VIEWS_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'ressources' . 'views');
-define('LAYOUTS_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'ressources' . DIRECTORY_SEPARATOR.  'views' . DIRECTORY_SEPARATOR . 'layouts');
+Dotenv::createImmutable(dirname(__DIR__))->load();
 
-$app = new Slim(['debug' => true]);
+define('BASE_PATH', dirname(__DIR__));
+define('APP_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app');
+define('CONTENT_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'content');
+define('VIEWS_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'views');
+
+$app = new Slim(['debug' => $_ENV['APP_DEBUG']]);
 
 $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(CONTENT_PATH));
 $files = new RegexIterator($files, '/^.+\.yaml/i', RecursiveRegexIterator::GET_MATCH);
@@ -16,8 +19,9 @@ $files = new RegexIterator($files, '/^.+\.yaml/i', RecursiveRegexIterator::GET_M
 foreach ($files as $file) {
     $file = $file[0];
     $page = new Page($file);
-    $app->any($page->getUrl(), function() use ($page){
-        $page->render();
+    $app->any($page->getUrl(), function() use ($page, $app){
+        require APP_PATH . DIRECTORY_SEPARATOR . 'helpers.php';
+        echo $page->render();
     });
 }
 
