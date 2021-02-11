@@ -4,7 +4,7 @@ use App\FormBuilder;
 
 function asset(string $path) {
     global $app;
-    return $app->request->getRootUri() . '/' . trim($path, '/');
+    return $app->getBasePath() . '/' . trim($path, '/');
 }
 
 function getEnvValue($key) {
