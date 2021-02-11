@@ -1,36 +1,38 @@
 # Site web dynamique sans base de données
 
-Cet outil permet de créer un site web dynamique sans base de donnée. Il n'y a pas d'interface backoffice pour éditer les contenu, mais l'administrateur peu directement écrire le contenu des pages en [HTML](https://developer.mozilla.org/fr/docs/Web/HTML/Reference) ou [Markdown](https://fr.wikipedia.org/wiki/Markdown) et ajouter des variables au format [FrontMatter](https://yaml.org/spec/1.2/spec.html) dans des fichier YAML.
+Cet outil permet de créer un site web dynamique sans base de donnée. Il n'y a pas d'interface backoffice, mais l'administrateur peut directement écrire le contenu des pages en [HTML](https://developer.mozilla.org/fr/docs/Web/HTML/Reference) ou en [Markdown](https://fr.wikipedia.org/wiki/Markdown) et ajouter des variables au format [FrontMatter](https://yaml.org/spec/1.2/spec.html) dans des fichiers YAML.
 
 
 ## Comment ça marche
 L'application scan récursivement le contenu du dossier "content" et génère à la volé les url accessible via le navigateur. Par example le fichier /content/a-propos.html.yaml sera accessible avec l'URL : http://example.fr/a-propos.
 
-Ainsi on peut créer autant de pages que l'on souhaite, on peut même gérer le multi-langue. Par contre il ne faut pas oublier que cet outils est pertinent pour des simples et/ou sans gros budget, car la lecture de fichiers n'est pas ce qu'il y a de plus performant.
+Ainsi on peut créer autant de pages que l'on souhaite, on peut même gérer le multi-langue. Par contre il ne faut pas oublier que cet outils est pertinent pour des projets simples, car la lecture de fichiers n'est pas ce qu'il y a de plus performant.
 
 Le contenu des fichiers (sous le FrontMatter) peut être rédigé en Markdown ou en html, le système parsera l'un ou l'autre en fonction de l'extension du fichier : nom-fichier.html.yaml, mon-fichier.markdown.yaml.
 
-Il est très important de noter que LE NOM DES FICHIERS NE DOIT PAS CONTENIR DE CARACTÈRES SPÉCIAUX, D'ACCENT, D'ESPACE, ET DOIT ÊTRE UNIQUE. Pas 2 fichiers dans le même répertoire avec des noms identique, remplacer les espaces par des tirets.
+Il est très important de noter que LE NOM DES FICHIERS NE DOIT PAS CONTENIR DE CARACTÈRES SPÉCIAUX, D'ACCENTS, D'ESPACES, ET DOIT ÊTRE UNIQUE. Pas 2 fichiers dans le même répertoire avec des noms identique, remplacer les espaces par des tirets.
 
 ## Configuration
-Il y a un peu de configuration à faire avec les variables d'environnemnt. Renommer le fichier .env.example en .env et remplir les clé pour le nom du site, les mails, etc...
+Il y a un peu de configuration à faire avec les variables d'environnement. Renommer le fichier ".env.example" en ".env" et remplir les clés pour le nom du site, les mails, etc.
 
 ## Affichage et variables
-L'arborescence de dossier est inspiré de Laravel avec le dossier /resources qui contient les assets à compiler et les vues qui sont au format [Blade](https://github.com/jenssegers/blade). Cette version allégée de Blade permet d'avoir les vues imbriqués, les boucles, les conditions... Par contre certaines fonctions avancées incluse grâce à Laravel ne sont pas disponible, il faudra les créer à la main dans le fichier /app/helpers.php.
+L'arborescence de dossier est inspiré de Laravel avec le dossier /resources qui contient les assets à compiler et les vues qui sont au format [Blade](https://github.com/jenssegers/blade). Cette version allégée de Blade permet d'avoir les vues imbriqués, les boucles, les conditions... (voir la documentation) Par contre certaines fonctions avancées incluse grâce à Laravel ne sont pas disponible, il faudra les créer à la main dans le fichier /app/helpers.php.
 
 ### Variables
-Toutes les variables déclarées en FrontMatter seront disponible dans le template via l'instance de l'objet Page et la clé qui représente la variable:
+Toutes les variables déclarées en FrontMatter (entre les '---') seront disponible dans le template via l'instance de l'objet Page et la clé qui représente la variable:
 ```yaml
 # yaml
+---
 title: Mon titre
 header_title: Titre de l'entête
+---
 ```
 ```html
 <!-- html -->
 <title>{{ $page->title }}</title>
 <h1>{{ $page->header_title }}</h1>
 ```
-Le contenu du fichier (sous le FrontMatter) s'obtient avec la propriété "content", il faudra penser à échapper les caractères pour que html soit interprété :
+Le contenu du fichier (sous le FrontMatter, après les '---') s'obtient avec la propriété "content", il faudra penser à échapper les caractères pour que html soit interprété :
 ```html
 <!-- html -->
 <div>{!! $page->content !!}</div>
@@ -64,6 +66,9 @@ npm install && npm run watch
 Lance un serveur de développement local avec le "hot reload", le navigateur se met à jours automatiquement dès qu'on modifie un fichier blade, scss, ou js.
 
 Il est évidemment possible d'utiliser n'importe qu'elle autre outils de build.
+
+## Helpers
+Les fonctions du fichier /app/helpers.php sont disponible dans les pages, ne pas hésiter à en crééer selon les besoins du projet.
 
 ## TODO
 -[ ] Gestion du menu ? Manuellement ? Semi-automatique avec une fonction ? ou Automatique avec la recursivité ?
