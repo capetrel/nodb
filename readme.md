@@ -1,4 +1,4 @@
-# Base de site web sans Base de données
+# Site web dynamique sans base de données
 
 Cet outil permet de créer un site web dynamique sans base de donnée. Il n'y a pas d'interface backoffice pour éditer les contenu, mais l'administrateur peu directement écrire le contenu des pages en [HTML](https://developer.mozilla.org/fr/docs/Web/HTML/Reference) ou [Markdown](https://fr.wikipedia.org/wiki/Markdown) et ajouter des variables au format [FrontMatter](https://yaml.org/spec/1.2/spec.html) dans des fichier YAML.
 
