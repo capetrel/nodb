@@ -9,17 +9,18 @@ class FormBuilder
 
     /**
      * Generate html code for a field
-     * @param string $key
-     * @param $value
-     * @param null|string $label
-     * @param array $options
-     * @param array $htmlAttributs
-     * @return string
+     * @param null|array $data Les données posté
+     * @param string $key Clé de la donnée posté
+     * @param $value mixed Attribut html value
+     * @param null|string $label L'étiquette du champ
+     * @param array $options Champ texte par default sinon type = checkbox, textarea, select, file
+     * @param array $htmlAttributs Attributs html : id, class, etc.
+     * @return string Renvoir le champ généré.
      */
-    public function field(string $key, $value, ?string $label = null, array $options = [], array $htmlAttributs = [] ): string
+    public function field(?array $data, string $key, $value, ?string $label = null, array $options = [], array $htmlAttributs = [] ): string
     {
         $type = $options['type'] ?? 'text';
-        $error = $this->getErrorHtml($key);
+        $error = $this->getErrorHtml($data, $key);
         $value = $this->convertValue($value);
         $class = 'form-group';
         $attributes = array_merge([
@@ -48,26 +49,45 @@ class FormBuilder
         return "<div class=\"" . $class . "\"><label for=\"$key\">{$label}</label>{$input}{$error}</div>";
     }
 
+    private function validatePostedData($data) {
+        $validator = (new ValidationError($data))
+            ->required('name', 'email', 'message')
+            ->textLength('name', 5)
+            ->email('email')
+            ->textLength('message', 10);
+        return $validator->isValid();
+    }
+
+    /**
+     * Get errors in context (all variables passed to view) and generate html
+     * @param array|null $data
+     * @param $key
+     * @return string
+     */
+    private function getErrorHtml(?array $data, $key): string
+    {
+        if(is_null($data)) {
+            return "";
+        }
+        $error = $key ?? false;
+        if ($error) {
+            return "<small class=\"form-text text-muted\">{$error}</small>";
+        }
+        return "";
+    }
+
+    /**
+     * TODO, trouver à quoi ça sert
+     * Dans le cas d'un champ date ?
+     * @param $value
+     * @return string
+     */
     private function convertValue($value): string
     {
         if ($value instanceof \DateTime) {
             return $value->format('Y-m-d H:i:s');
         }
         return (string)$value;
-    }
-
-    /**
-     * Get errors in context (all variables passed to view) and generate html
-     * @param $key
-     * @return string
-     */
-    private function getErrorHtml($key)
-    {
-        $error = $key ?? false;
-        if ($error) {
-            return "<small class=\"form-text text-muted\">{$error}</small>";
-        }
-        return "";
     }
 
     /**
@@ -115,6 +135,22 @@ class FormBuilder
     }
 
     /**
+     * Gènère un input de type checkbox
+     * @param null|string $value
+     * @param array $attributes
+     * @return string
+     */
+    private function checkbox(?string $value, array $attributes)
+    {
+        $name = $attributes['name'];
+        $html = "<input type=\"hidden\" name=\"$name\" value=\"0\">";
+        if ($value) {
+            $attributes['checked'] = true;
+        }
+        return $html . "<input type=\"checkbox\" " . $this->getHtmlFromArray($attributes) . " value=\"1\">";
+    }
+
+    /**
      * Generate the html code of the attributes from a array
      * @param array $attributes
      * @return string
@@ -131,21 +167,5 @@ class FormBuilder
             }
         }
         return implode(' ', $htmlParts);
-    }
-
-    /**
-     * Gènère un input de type checkbox
-     * @param null|string $value
-     * @param array $attributes
-     * @return string
-     */
-    private function checkbox(?string $value, array $attributes)
-    {
-        $name = $attributes['name'];
-        $html = "<input type=\"hidden\" name=\"$name\" value=\"0\">";
-        if ($value) {
-            $attributes['checked'] = true;
-        }
-        return $html . "<input type=\"checkbox\" " . $this->getHtmlFromArray($attributes) . " value=\"1\">";
     }
 }

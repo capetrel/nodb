@@ -1,8 +1,6 @@
 @php
     $formBuilder = new \App\FormBuilder();
-    if(isset($_POST) && !empty($_POST)) {
-        dd($_POST);
-    }
+    $data = (isset($_POST) && !empty($_POST)) ? $_POST : null;
 
 @endphp
 @extends('layouts.site')
@@ -18,9 +16,9 @@
 @section('content')
     <section class="contact">
         <form class="contact-form" action="" method="post">
-            {!! $formBuilder->field('name', null, 'Votre nom') !!}
-            {!! $formBuilder->field('email', null, 'Votre email') !!}
-            {!! $formBuilder->field('message', null, 'Votre message', ['type' => 'textarea']) !!}
+            {!! $formBuilder->field($data, 'name', null, 'Votre nom') !!}
+            {!! $formBuilder->field($data, 'email', null, 'Votre email') !!}
+            {!! $formBuilder->field($data, 'message', null, 'Votre message', ['type' => 'textarea']) !!}
             <button class="btn btn-primary right">Envoyer</button>
         </form>
     </section>
