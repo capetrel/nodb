@@ -72,5 +72,6 @@ Les fonctions du fichier /app/helpers.php sont disponible dans les pages, ne pas
 
 ## TODO
 -[ ] Gestion du menu ? Manuellement ? Semi-automatique avec une fonction ? ou Automatique avec la recursivité ?
+-[ ] Utiliser plutôt Slim 4 ? ou une libraire de routing ?
 -[ ] Prévoir erreur sur les noms de fichiers (capturer ? corriger ?)
 -[ ] Intégrer un formulaire de contact basique
