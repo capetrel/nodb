@@ -141,6 +141,9 @@ body {
 .error-message,
 .success-message {
   width: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
   margin: 20px 0;
   padding: 10px;
 }
@@ -151,6 +154,10 @@ body {
 
 .error-message {
   background-color: #F13B0A;
+}
+
+#closeFlash {
+  cursor: pointer;
 }
 
 .container {

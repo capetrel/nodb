@@ -23,14 +23,23 @@ body {
 .error-message,
 .success-message {
   width: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
   margin: $space1 0;
   padding: $space1 - 10;
 }
+
 .success-message {
   background-color: $success;
 }
+
 .error-message {
   background-color: $error;
+}
+
+#closeFlash {
+  cursor: pointer;
 }
 
 .container {

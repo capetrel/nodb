@@ -26,11 +26,8 @@
             </div>
         @endif
 
-        @if(isset($result['success']))
-            <div class="success-message">{{ $result['success'][0] }}</div>
-        @elseif(!is_null($result['errors']))
-            <div class="error-message">Veuillez corriger les erreurs dans le formulaire</div>
-        @endif
+        @include('blocs.message-flash')
+
         <form class="contact-form" action="" method="post">
             {!! $formBuilder->field($result['errors'], 'name', $values, 'Votre nom') !!}
             {!! $formBuilder->field($result['errors'], 'email', $values, 'Votre email') !!}
