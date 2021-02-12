@@ -44,7 +44,7 @@ Il n'y a pas de variables obligatoires, mais 3 variables seront utilisées si el
 Sinon le créateur du site est libre de créer autant de variables qu'il juge utiles.
 
 ### Affichage
-Il y a 2 fichiers obligatoires, /resources/views/layouts/site.blade.php et /resources/views/pages/default.blade.php, qu'il ne faut pas renommer, mais dont le contenu est modifiable. le fichier default.blade.php est inclus dans site.blade.php. La variable "layout" dans le YAML permet d'utiliser un autre fichier, dans ce cas le contenu de la variable doit correspondre au nom du fichier sans extension qui est dans le dossier /resources/views/pages/ : example avec index.markdown.yaml qui contient "home" dans "layout" et le fichier /resources/views/pages/home.blade.php.
+Il y a 2 fichiers obligatoires, /resources/views/layouts/site.blade.php et /resources/views/pages/default.blade.php, qu'il ne faut pas renommer, mais dont le contenu est modifiable. le fichier default.blade.php est inclus dans site.blade.php. La variable "layout" dans le YAML permet d'utiliser un autre fichier, dans ce cas le contenu de la variable doit correspondre au nom du fichier sans extension qui est dans le dossier /resources/views/pages/ : example avec index.markdown.yaml qui contient "home" dans "layout" et /resources/views/pages/home.blade.php.
 
 Le projet de base fournit 2 examples qui propose une solution pour traiter des contenus dynamique de type article de blog. Dans ce cas la page d'accueil affiche une liste de clients et chaque clients à une page.
 
@@ -57,6 +57,8 @@ Il est possible d'ajouter un fichier css et/ou js dans une page spécifique avec
 Il sera ajouté automatiquement à la place de la commande @stack() dans le fichier site.blade.php
 
 La fonction php asset() dans les fichiers Blade, permet de construire le chemin vers la ressource contenue dans le dossier "/public/". Blade permet d'utiliser les fonctions natives de PHP dans sa syntaxe en plus des fonctions personnalisées.
+
+Le projet dispose d'un formulaire de contact basique avec validation des champs et message flash. Le formulaire se construit dynamiquement dans la vue grâce à la classe /app/FormBuilder, la validation des champs se trouve dans /app/ValidateForm et les messages d'erreurs dans /app/ValidationError. Les principaux champs HTML sont disponibles mais pas tous.
 
 ## Assets
 Le projet est livré avec laravel-mix et une configuration prête à être lancé.
