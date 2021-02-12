@@ -55,7 +55,7 @@ class Page
             return $this->$method($this->parsedData->getContent());
         }
         if(!isset($this->parsedData->getDataWithContent()[$key])) {
-            // throw new \Exception("La propriété : $key, n'existe pas dans le fichier yaml");
+            // throw new \Exception("La propriété : $key, n'existe pas dans le fichier yaml" . $this->path);
             return null;
         }
         if(is_array($this->parsedData->getDataWithContent()[$key])) {

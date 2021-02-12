@@ -23,20 +23,25 @@ session_start();
 
 $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(CONTENT_PATH));
 $files = new RegexIterator($files, $yaml_pattern, RecursiveRegexIterator::GET_MATCH);
-$structure = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(STRUCTURE_PATH));
-$structure = new RegexIterator($structure, $yaml_pattern, RecursiveRegexIterator::GET_MATCH);
+$structures = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(STRUCTURE_PATH));
+$structures = new RegexIterator($structures, $yaml_pattern, RecursiveRegexIterator::GET_MATCH);
 
-$menus = [];
-foreach ($structure as $element) {
-    $file = $element[0];
-    $structure = new Structure($file);
-    $menus = $structure->menus;
+$commonElements = [];
+foreach ($structures as $element) {
+    $element = $element[0];
+    $structureElement = new Structure($element);
+    if(!is_null($structureElement->menus)) {
+        $commonElements['menus'] = $structureElement->menus;
+    }
+    if(!is_null($structureElement->blocs)) {
+        $commonElements['blocs'] = $structureElement->blocs;
+    }
 }
 
 foreach ($files as $file) {
     $file = $file[0];
     $page = new Page($file);
-    $app->any($page->getUrl(), function (Request $request, Response $response, $args) use ($page, $menus, $app) {
+    $app->any($page->getUrl(), function (Request $request, Response $response, $args) use ($page, $commonElements, $app) {
         require APP_PATH . DIRECTORY_SEPARATOR . 'helpers.php';
 
         if($request->getMethod() === 'POST' && $request->getUri()->getPath() === '/contact') {
@@ -50,9 +55,9 @@ foreach ($files as $file) {
                 $result = null;
                 $result['success'] = $flash->getMessage('success');
             }
-            $response->getBody()->write($page->render($menus, $result));
+            $response->getBody()->write($page->render($commonElements, $result));
         } else {
-            $response->getBody()->write($page->render($menus));
+            $response->getBody()->write($page->render($commonElements));
         }
         return $response;
     });

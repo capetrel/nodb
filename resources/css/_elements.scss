@@ -7,3 +7,13 @@ button {
   border: none;
   margin: ($space1 - 10) 0;
 }
+
+.block {
+  max-width: 200px;
+  text-align: left;
+  .block-title {
+    font-size: $size1 + 6;
+    font-weight: bold;
+    margin-bottom: $space1 - 10;
+  }
+}

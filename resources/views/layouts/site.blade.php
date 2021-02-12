@@ -26,7 +26,7 @@
                     <img src="{{ asset('/img/svg/logo.svg') }}" alt="Logo">
                 </div>
                 <ul class="menu">
-                    @foreach($structure['menu_header'] as $title => $content)
+                    @foreach($structure['menus']['menu_header'] as $title => $content)
                         <li class="menu-item {{ isset($content['submenu']) ? 'dropdown-item' : '' }}">
 
                             @if(isset($content['submenu']))
@@ -61,17 +61,29 @@
         </main>
         <footer class="container">
             <div class="wrapper">
-                <nav class="footer-menu">
-                    <ul>
-                        @foreach($structure['menu_footer'] as $title => $content)
-                            <li class="menu-item">
-                                <a href="{{ $content['link'] }}" target="{{ $content['target'] ? $content['target'] : '_self' }}" title="{{ $content['title'] ? $content['title'] : 'Voir la page' }}">
-                                    {{ $title }}
-                                </a>
-                            </li>
+                <div class="col-2">
+                    <div class="block">
+                        @foreach($structure['blocs']['bloc_footer'] as $content)
+                            <div class="block-title">
+                                {{ $content["title"] }}
+                            </div>
+                            <div class="block-content">
+                                {{ $content["content"] }}
+                            </div>
                         @endforeach
-                    </ul>
-                </nav>
+                    </div>
+                    <nav class="footer-menu">
+                        <ul>
+                            @foreach($structure['menus']['menu_footer'] as $title => $content)
+                                <li class="menu-item">
+                                    <a href="{{ $content['link'] }}" target="{{ $content['target'] ? $content['target'] : '_self' }}" title="{{ $content['title'] ? $content['title'] : 'Voir la page' }}">
+                                        {{ $title }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </footer>
 

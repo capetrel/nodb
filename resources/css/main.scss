@@ -34,6 +34,7 @@ body {
 }
 
 .container {
+  padding: ($space1 + 10) 0;
   width: 100%;
 }
 
@@ -62,6 +63,10 @@ header {
     margin: 0 $space1;
     padding: $space1;
   }
+}
+.col-2 {
+  display: flex;
+  justify-content: space-between;
 }
 
 footer {
