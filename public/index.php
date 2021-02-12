@@ -1,6 +1,7 @@
 <?php
 require '../vendor/autoload.php';
 use App\Page;
+use App\Structure;
 use Dotenv\Dotenv;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -11,23 +12,31 @@ Dotenv::createImmutable(dirname(__DIR__))->load();
 
 define('BASE_PATH', dirname(__DIR__));
 define('APP_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app');
-define('CONTENT_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'content');
+define('CONTENT_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'site-content');
+define('STRUCTURE_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'site-structure');
 define('VIEWS_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'views');
 
-$app = AppFactory::create(); // Slim 4
+$yaml_pattern = '/^.+\.yaml/i';
+
+$app = AppFactory::create();
 session_start();
-$container = $app->getContainer();
-$container['flash'] = function () {
-    return new Messages();
-};
 
 $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(CONTENT_PATH));
-$files = new RegexIterator($files, '/^.+\.yaml/i', RecursiveRegexIterator::GET_MATCH);
+$files = new RegexIterator($files, $yaml_pattern, RecursiveRegexIterator::GET_MATCH);
+$structure = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(STRUCTURE_PATH));
+$structure = new RegexIterator($structure, $yaml_pattern, RecursiveRegexIterator::GET_MATCH);
+
+$menus = [];
+foreach ($structure as $element) {
+    $file = $element[0];
+    $structure = new Structure($file);
+    $menus = $structure->menus;
+}
 
 foreach ($files as $file) {
     $file = $file[0];
     $page = new Page($file);
-    $app->any($page->getUrl(), function (Request $request, Response $response, $args) use ($page, $app) {
+    $app->any($page->getUrl(), function (Request $request, Response $response, $args) use ($page, $menus, $app) {
         require APP_PATH . DIRECTORY_SEPARATOR . 'helpers.php';
 
         if($request->getMethod() === 'POST' && $request->getUri()->getPath() === '/contact') {
@@ -41,9 +50,9 @@ foreach ($files as $file) {
                 $result = null;
                 $result['success'] = $flash->getMessage('success');
             }
-            $response->getBody()->write($page->render($result));
+            $response->getBody()->write($page->render($menus, $result));
         } else {
-            $response->getBody()->write($page->render());
+            $response->getBody()->write($page->render($menus));
         }
         return $response;
     });

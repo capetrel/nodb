@@ -20,6 +20,12 @@
 
 @section('content')
     <section class="contact">
+        @if($page->content)
+            <div class="content">
+                {!! $page->content !!}
+            </div>
+        @endif
+
         @if(isset($result['success']))
             <div class="success-message">{{ $result['success'][0] }}</div>
         @elseif(!is_null($result['errors']))

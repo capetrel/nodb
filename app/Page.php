@@ -77,7 +77,7 @@ class Page
         return $path;
     }
 
-    public function render(array $result = null)
+    public function render(array $structure = null, array $result = null)
     {
         $page = $this;
         if(is_null($page->layout)) {
@@ -85,8 +85,9 @@ class Page
         } else {
             $layout = $page->layout;
         }
+
         $blade = new Blade(VIEWS_PATH, BASE_PATH . DIRECTORY_SEPARATOR. 'cache');
-        return $blade->render('pages.'.$layout, compact('page', 'result'));
+        return $blade->render('pages.'.$layout, compact('page', 'structure','result'));
     }
 
     private function parseMarkdown ($content) {

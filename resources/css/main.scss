@@ -2,12 +2,18 @@
 @import "variables";
 @import "elements";
 @import "form";
+@import "menu";
 
 body, html {
   margin:0;
   padding: 0;
 }
-
+a {
+  text-decoration: none;
+  &:visited{
+    color: inherit;
+  }
+}
 body {
   font-family: LibreFranklin, sans-serif;
   background-color: $white;
@@ -35,39 +41,7 @@ body {
   max-width: 1280px;
   margin: 0 auto;
 }
-nav {
-  background-color: $secondary-color;
-  .main-navigation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding:  ($space1 - 10) 0;
-    .logo {
-      width: 130px;
-      height: auto;
-      img {
-        width: 100%;
-      }
-    }
 
-    .menu {
-      font-weight: bold;
-      font-size: $size1 + 4px;
-      width: 40%;
-      display: flex;
-      list-style: none;
-      justify-content: space-between;
-      li {
-        color: $gray4;
-        cursor: pointer;
-        transition: color 0.2s ease-in-out;
-        :hover {
-          color: $main-color;
-        }
-      }
-    }
-  }
-}
 header {
   background-color: $main-color;
   .header {
