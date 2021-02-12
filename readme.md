@@ -120,6 +120,7 @@ Les fonctions du fichier /app/helpers.php sont disponible dans les pages, ne pas
 ## TODO
 -[x] Utiliser plutôt Slim 4
 -[x] Intégrer un formulaire de contact basique
--[x] Gestion des menu
+-[x] Gestion des menus
 -[ ] Générer un sitemap automatiquement.
+-[ ] Désactiver le message flash automatiquement
 -[ ] Prévoir erreur sur les noms de fichiers (capturer ? corriger ?)
