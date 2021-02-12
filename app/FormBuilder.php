@@ -9,19 +9,19 @@ class FormBuilder
 
     /**
      * Generate html code for a field
-     * @param null|array $data Les données posté
+     * @param null|array $result Les données posté avec les erreurs
      * @param string $key Clé de la donnée posté
-     * @param $value mixed Attribut html value
+     * @param null|mixed$value Attribut html value
      * @param null|string $label L'étiquette du champ
      * @param array $options Champ texte par default sinon type = checkbox, textarea, select, file
      * @param array $htmlAttributs Attributs html : id, class, etc.
      * @return string Renvoir le champ généré.
      */
-    public function field(?array $data, string $key, $value, ?string $label = null, array $options = [], array $htmlAttributs = [] ): string
+    public function field(?array $result, string $key, $value, ?string $label = null, array $options = [], array $htmlAttributs = [] ): string
     {
         $type = $options['type'] ?? 'text';
-        $error = $this->getErrorHtml($data, $key);
-        $value = $this->convertValue($value);
+        $error = $this->getErrorHtml($result, $key);
+        $value = is_null($value) ? '' : $this->convertValue($value[$key]);
         $class = 'form-group';
         $attributes = array_merge([
             'class' => trim('form-control ' . ($options['class'] ?? '')),
@@ -49,15 +49,6 @@ class FormBuilder
         return "<div class=\"" . $class . "\"><label for=\"$key\">{$label}</label>{$input}{$error}</div>";
     }
 
-    private function validatePostedData($data) {
-        $validator = (new ValidationError($data))
-            ->required('name', 'email', 'message')
-            ->textLength('name', 5)
-            ->email('email')
-            ->textLength('message', 10);
-        return $validator->isValid();
-    }
-
     /**
      * Get errors in context (all variables passed to view) and generate html
      * @param array|null $data
@@ -69,7 +60,7 @@ class FormBuilder
         if(is_null($data)) {
             return "";
         }
-        $error = $key ?? false;
+        $error = $data[$key] ?? false;
         if ($error) {
             return "<small class=\"form-text text-muted\">{$error}</small>";
         }
@@ -77,8 +68,7 @@ class FormBuilder
     }
 
     /**
-     * TODO, trouver à quoi ça sert
-     * Dans le cas d'un champ date ?
+     * retourne la valeur saisie par l'utilisateur, la convertie si c'est une date
      * @param $value
      * @return string
      */

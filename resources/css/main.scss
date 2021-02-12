@@ -1,5 +1,7 @@
 @import "fonts";
 @import "variables";
+@import "elements";
+@import "form";
 
 body, html {
   margin:0;
@@ -10,6 +12,13 @@ body {
   font-family: LibreFranklin, sans-serif;
   background-color: $white;
   color: $text;
+}
+
+.success-message {
+  width: auto;
+  background-color: $success;
+  margin: $space1 0;
+  padding: $space1 - 10;
 }
 
 .container {

@@ -10,6 +10,30 @@
   font-weight: 100 1000;
   font-stretch: 25% 151%;
 }
+button {
+  background-color: #00cb71;
+  padding: 10px;
+  color: #06071A;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+  margin: 10px 0;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+}
+.form-group label {
+  color: #06071A;
+  margin-bottom: 5px;
+}
+.form-group input {
+  border: 1px solid #878787;
+  padding: 10px;
+}
+
 body, html {
   margin: 0;
   padding: 0;
@@ -19,6 +43,13 @@ body {
   font-family: LibreFranklin, sans-serif;
   background-color: #FFFFEE;
   color: #06071A;
+}
+
+.success-message {
+  width: auto;
+  background-color: #46D600;
+  margin: 20px 0;
+  padding: 10px;
 }
 
 .container {
@@ -31,7 +62,7 @@ body {
 }
 
 nav {
-  background-color: #3ecf8e;
+  background-color: #00cb71;
 }
 nav .main-navigation {
   display: flex;

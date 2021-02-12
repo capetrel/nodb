@@ -1,8 +1,13 @@
 @php
     $formBuilder = new \App\FormBuilder();
-    $data = (isset($_POST) && !empty($_POST)) ? $_POST : null;
-
+    if (isset($result['values'])) {
+        $values = $result['values']->getValues();
+    } else {
+        $result['errors'] = null;
+        $values = null;
+    }
 @endphp
+
 @extends('layouts.site')
 
 @push('css')
@@ -15,11 +20,14 @@
 
 @section('content')
     <section class="contact">
+        @if(isset($result['success']))
+            <div class="success-message">{{ $result['success'][0] }}</div>
+        @endif
         <form class="contact-form" action="" method="post">
-            {!! $formBuilder->field($data, 'name', null, 'Votre nom') !!}
-            {!! $formBuilder->field($data, 'email', null, 'Votre email') !!}
-            {!! $formBuilder->field($data, 'message', null, 'Votre message', ['type' => 'textarea']) !!}
-            <button class="btn btn-primary right">Envoyer</button>
+            {!! $formBuilder->field($result['errors'], 'name', $values, 'Votre nom') !!}
+            {!! $formBuilder->field($result['errors'], 'email', $values, 'Votre email') !!}
+            {!! $formBuilder->field($result['errors'], 'message', $values, 'Votre message', ['type' => 'textarea']) !!}
+            <button>Envoyer</button>
         </form>
     </section>
 @endsection
