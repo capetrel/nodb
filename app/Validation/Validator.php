@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Validation;
 
 use Psr\Http\Message\UploadedFileInterface;
 

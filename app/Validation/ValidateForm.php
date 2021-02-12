@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App;
+namespace App\Validation;
 
 
 use GuzzleHttp\Psr7\Response;

@@ -2,6 +2,7 @@
 require '../vendor/autoload.php';
 use App\Page;
 use App\Structure;
+use App\Validation\ValidateForm;
 use Dotenv\Dotenv;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -42,11 +43,11 @@ foreach ($files as $file) {
     $file = $file[0];
     $page = new Page($file);
     $app->any($page->getUrl(), function (Request $request, Response $response, $args) use ($page, $commonElements, $app) {
-        require APP_PATH . DIRECTORY_SEPARATOR . 'helpers.php';
+        require APP_PATH . DIRECTORY_SEPARATOR . 'Utils' . DIRECTORY_SEPARATOR .'helpers.php';
 
         if($request->getMethod() === 'POST' && $request->getUri()->getPath() === '/contact') {
             $postedData = $request->getParsedBody();
-            $inputs = new \App\ValidateForm($postedData, $request->getUri()->getPath());
+            $inputs = new ValidateForm($postedData, $request->getUri()->getPath());
             $errors = $inputs->validate();
             $result['values'] = $inputs;
             $result['errors'] = $errors;
