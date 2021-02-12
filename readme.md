@@ -71,7 +71,7 @@ Il est évidemment possible d'utiliser n'importe qu'elle autre outils de build.
 Les fonctions du fichier /app/helpers.php sont disponible dans les pages, ne pas hésiter à en crééer selon les besoins du projet.
 
 ## TODO
+-[x] Utiliser plutôt Slim 4
+-[x] Intégrer un formulaire de contact basique
 -[ ] Gestion du menu ? Manuellement ? Semi-automatique avec une fonction ? ou Automatique avec la recursivité ?
--[ ] Utiliser plutôt Slim 4 ? ou une libraire de routing ?
 -[ ] Prévoir erreur sur les noms de fichiers (capturer ? corriger ?)
--[ ] Intégrer un formulaire de contact basique
