@@ -18,6 +18,7 @@ define('STRUCTURE_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'site-structure');
 define('VIEWS_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'views');
 
 $yaml_pattern = '/^.+\.yaml/i';
+$slug_pattern = '/^[a-z0-9]+(-[a-z0-9]+)*$/';
 
 $app = AppFactory::create();
 session_start();
@@ -42,6 +43,9 @@ foreach ($structures as $element) {
 foreach ($files as $file) {
     $file = $file[0];
     $page = new Page($file);
+    if (!preg_match($slug_pattern, $page->getUrl())) {
+        throw new Exception("Le fichier n'a pas de nom valide");
+    }
     $app->any($page->getUrl(), function (Request $request, Response $response, $args) use ($page, $commonElements, $app) {
         require APP_PATH . DIRECTORY_SEPARATOR . 'Utils' . DIRECTORY_SEPARATOR .'helpers.php';
 

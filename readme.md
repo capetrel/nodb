@@ -121,6 +121,6 @@ Les fonctions du fichier /app/helpers.php sont disponible dans les pages, ne pas
 -[x] Utiliser plutôt Slim 4
 -[x] Intégrer un formulaire de contact basique
 -[x] Gestion des menus
--[ ] Générer un sitemap automatiquement.
--[ ] Désactiver le message flash automatiquement
+-[x] Désactiver le message flash automatiquement
+-[x] Générer un sitemap automatiquement ? Pour des petits sites ce n'est pas indispensable, le faire manuellement n'est pas si long.
 -[ ] Prévoir erreur sur les noms de fichiers (capturer ? corriger ?)
