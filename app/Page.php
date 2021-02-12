@@ -3,7 +3,6 @@
 
 namespace App;
 
-
 use cebe\markdown\GithubMarkdown;
 use Jenssegers\Blade\Blade;
 use Webuni\FrontMatter\FrontMatter;
@@ -78,7 +77,7 @@ class Page
         return $path;
     }
 
-    public function render()
+    public function render(array $result = null)
     {
         $page = $this;
         if(is_null($page->layout)) {
@@ -86,9 +85,8 @@ class Page
         } else {
             $layout = $page->layout;
         }
-
         $blade = new Blade(VIEWS_PATH, BASE_PATH . DIRECTORY_SEPARATOR. 'cache');
-        return $blade->render('pages.'.$layout, compact('page'));
+        return $blade->render('pages.'.$layout, compact('page', 'result'));
     }
 
     private function parseMarkdown ($content) {

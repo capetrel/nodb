@@ -1,0 +1,9 @@
+button {
+  background-color: $secondary-color;
+  padding: $space1 - 10;
+  color: $text;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+  margin: ($space1 - 10) 0;
+}

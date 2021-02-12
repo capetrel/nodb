@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+require('dotenv').config();
 
 /*
  |--------------------------------------------------------------------------
@@ -11,6 +12,7 @@ const mix = require('laravel-mix');
  |
  */
 
+const domain = process.env.APP_URL;
 mix.disableSuccessNotifications()
     .setResourceRoot('../')
     .setPublicPath('public')
@@ -20,4 +22,4 @@ mix.disableSuccessNotifications()
     .sass('resources/css/main.scss', 'css/main.css')
     .sass('resources/css/test.scss', 'css/test.css')
     .sourceMaps()
-    .browserSync('http://bddless-site.test');
+    .browserSync('http://' + domain);

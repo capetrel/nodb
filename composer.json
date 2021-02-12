@@ -13,11 +13,14 @@
         }
     },
     "require": {
-        "slim/slim": "~2.0",
         "webuni/front-matter": "^1.2",
         "cebe/markdown": "^1.2",
         "jenssegers/blade": "^1.4",
-        "vlucas/phpdotenv": "^5.3"
+        "vlucas/phpdotenv": "^5.3",
+        "slim/slim": "^4.7",
+        "guzzlehttp/psr7": "^1.7",
+        "http-interop/http-factory-guzzle": "^1.0",
+        "slim/flash": "^0.4.0"
     },
     "require-dev": {
         "symfony/var-dumper": "^5.2"
