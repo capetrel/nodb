@@ -33,6 +33,9 @@ button {
   border: 1px solid #878787;
   padding: 10px;
 }
+.form-group.has-danger .text-muted {
+  color: #F13B0A;
+}
 
 body, html {
   margin: 0;
@@ -45,11 +48,19 @@ body {
   color: #06071A;
 }
 
+.error-message,
 .success-message {
   width: auto;
-  background-color: #46D600;
   margin: 20px 0;
   padding: 10px;
+}
+
+.success-message {
+  background-color: #46D600;
+}
+
+.error-message {
+  background-color: #F13B0A;
 }
 
 .container {

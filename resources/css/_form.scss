@@ -10,4 +10,9 @@
     border: 1px solid $gray3;
     padding: $space1 - 10;
   }
+  &.has-danger {
+    .text-muted {
+      color: $error;
+    }
+  }
 }

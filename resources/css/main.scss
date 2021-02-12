@@ -14,11 +14,17 @@ body {
   color: $text;
 }
 
+.error-message,
 .success-message {
   width: auto;
-  background-color: $success;
   margin: $space1 0;
   padding: $space1 - 10;
+}
+.success-message {
+  background-color: $success;
+}
+.error-message {
+  background-color: $error;
 }
 
 .container {
