@@ -67,7 +67,7 @@ Le projet dispose d'un formulaire de contact basique avec validation des champs 
 
 
 ## Les menus et les blocs
-On peu ajouter autant de menus et de blocs que nécessaire, ils seront disponible dans les vues (layout ou page) avec cette variable :
+On peut ajouter autant de menus et de blocs que nécessaire, ils seront disponibles dans les vues (layout ou page) avec cette variable :
 ```php
 $structure['menus']['nom_du_menu'];
 $structure['blocs']['nom_du_bloc'];
@@ -123,4 +123,4 @@ Les fonctions du fichier /app/helpers.php sont disponible dans les pages, ne pas
 -[x] Gestion des menus
 -[x] Désactiver le message flash automatiquement
 -[x] Générer un sitemap automatiquement ? Pour des petits sites ce n'est pas indispensable, le faire manuellement n'est pas si long.
--[ ] Prévoir erreur sur les noms de fichiers (capturer ? corriger ?)
+-[x] Mettre en place redirection 404 et debug
