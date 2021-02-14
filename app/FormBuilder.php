@@ -9,13 +9,13 @@ class FormBuilder
 
     /**
      * Generate html code for a field
-     * @param null|array $result Les données posté avec les erreurs
-     * @param string $key Clé de la donnée posté
-     * @param null|mixed$value Attribut html value
-     * @param null|string $label L'étiquette du champ
-     * @param array $options Champ texte par default sinon type = checkbox, textarea, select, file
-     * @param array $htmlAttributs Attributs html : id, class, etc.
-     * @return string Renvoir le champ généré.
+     * @param null|array $result Posted data, with errors if there is any
+     * @param string $key Posted data's key
+     * @param null|mixed$value HTML attribute value
+     * @param null|string $label Field's label
+     * @param array $options Default field type = text, else : checkbox, textarea, select, file
+     * @param array $htmlAttributs html Attributes (id, class, etc.)
+     * @return string generated field.
      */
     public function field(?array $result, string $key, $value, ?string $label = null, array $options = [], array $htmlAttributs = [] ): string
     {
@@ -50,7 +50,7 @@ class FormBuilder
     }
 
     /**
-     * Get errors in context (all variables passed to view) and generate html
+     * Get errors and render it in html
      * @param array|null $data
      * @param $key
      * @return string
@@ -68,7 +68,7 @@ class FormBuilder
     }
 
     /**
-     * retourne la valeur saisie par l'utilisateur, la convertie si c'est une date
+     * Return user input. If date object, convert it
      * @param $value
      * @return string
      */
@@ -81,7 +81,7 @@ class FormBuilder
     }
 
     /**
-     * Generate html code for input type text
+     * Generate html code for input
      * @param null|string $value
      * @param array $attributes
      * @return string
@@ -91,13 +91,18 @@ class FormBuilder
         return "<input " . $this->getHtmlFromArray($attributes) . " value=\"{$value}\">";
     }
 
+    /**
+     * Generate html code for input type file
+     * @param array $attributes
+     * @return string
+     */
     private function file(array $attributes): string
     {
         return "<input type=\"file\" " . $this->getHtmlFromArray($attributes) .">";
     }
 
     /**
-     * Generate html code for input type textarea
+     * Generate HTML code for input type textarea
      * @param null|string $value
      * @param array $attributes
      * @return string
@@ -114,7 +119,7 @@ class FormBuilder
      * @param array $attributes
      * @return string
      */
-    private function select(?string $value, array $options, array $attributes)
+    private function select(?string $value, array $options, array $attributes): string
     {
         $htmlOptions = array_reduce(array_keys($options), function (string $html, string $key) use ($options, $value) {
             $params = ['value' => $key, 'selected' => $key === $value];
@@ -125,12 +130,12 @@ class FormBuilder
     }
 
     /**
-     * Gènère un input de type checkbox
+     * Generate html code for checkbox
      * @param null|string $value
      * @param array $attributes
      * @return string
      */
-    private function checkbox(?string $value, array $attributes)
+    private function checkbox(?string $value, array $attributes): string
     {
         $name = $attributes['name'];
         $html = "<input type=\"hidden\" name=\"$name\" value=\"0\">";
@@ -145,7 +150,7 @@ class FormBuilder
      * @param array $attributes
      * @return string
      */
-    private function getHtmlFromArray(array $attributes)
+    private function getHtmlFromArray(array $attributes): string
     {
 
         $htmlParts = [];

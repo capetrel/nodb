@@ -30,7 +30,7 @@ class Validator
     }
 
     /**
-     * Verifie que l'élément est dans le tableau(capture les champs vides)
+     * Check if the element is in the array (capture empty fields)
      * @param mixed[] ...$keys
      * @return Validator
      */
@@ -49,7 +49,7 @@ class Validator
     }
 
     /**
-     * Verifie que le champ n'est pas vide
+     * Check that the field is not empty
      * @param string ...$keys
      * @return Validator
      */
@@ -65,7 +65,7 @@ class Validator
     }
 
     /**
-     * Verifie que le champ est vide (honeypot)
+     * Check that the field is empty (honeypot)
      * @param string $key
      * @return Validator
      */
@@ -79,7 +79,7 @@ class Validator
     }
 
     /**
-     * Verifie la taille des textes avec des paramètres
+     * Check text size with parameters
      * @param string $key
      * @param int|null $min
      * @param int|null $max
@@ -111,7 +111,7 @@ class Validator
     }
 
     /**
-     * Vérifie que le slug est valide
+     * Check if the value is a valid slug
      * @param string $key
      * @return Validator
      */
@@ -128,7 +128,7 @@ class Validator
 
 
     /**
-     * Verifie que l'élément est numérique
+     * Check that the element is numeric
      * @param string $key
      * @return Validator
      */
@@ -144,7 +144,7 @@ class Validator
     }
 
     /**
-     * Verifie que l'élément est numérique et qu'il est dans l'intervalle définit
+     * Check if the element is numeric and it is in the defined interval
      * @param string $key
      * @param int $min
      * @param int $max
@@ -164,7 +164,7 @@ class Validator
     }
 
     /**
-     * Vérifie que la date est au bon format (MYSQL freindly)
+     * Check if the full date has the correct format (MYSQL freindly)
      * @param string $key
      * @param string $format
      * @return Validator
@@ -181,7 +181,7 @@ class Validator
     }
 
     /**
-     * Vérifie que la date est au bon format (MYSQL freindly)
+     * Check if the short date has the correct format (MYSQL freindly)
      * @param string $key
      * @param string $format
      * @return Validator
@@ -198,7 +198,7 @@ class Validator
     }
 
     /**
-     * Autorise une date vide, sinon une date au bon format (MYSQL freindly)
+     * Allow an empty date, otherwise a date in the correct format (MYSQL freindly
      * @param string $key
      * @param string $format
      * @return Validator
@@ -218,7 +218,7 @@ class Validator
     }
 
     /**
-     * Vérifie que l'extension est dans le tableau d'extensions autorisées
+     * Check if the file's extension is in the table of allowed extensions
      * @param string $key
      * @param array $extensions
      * @return Validator
@@ -240,8 +240,7 @@ class Validator
 
 
     /**
-     * TODO : vérification du poid du fichier avant l'upload
-     * Vérifie que le fichier à bien été téléversé
+     * Check if the file has been uploaded
      * @param string $key
      * @return Validator
      */
@@ -259,7 +258,7 @@ class Validator
     }
 
     /**
-     * Vérifie la validité d'une adresse email
+     * Checks the validity of an email address
      * @param string $key
      * @return Validator
      */
@@ -272,6 +271,11 @@ class Validator
         return $this;
     }
 
+    /**
+     * Check if 2 fields have the same value (ex: confirm password)
+     * @param string $key
+     * @return $this
+     */
     public function confirm(string $key): self
     {
         $value = $this->getValue($key);
@@ -283,14 +287,6 @@ class Validator
     }
 
     /**
-     * @return ValidationError[]
-     */
-    public function getErrors(): array
-    {
-        return $this->errors;
-    }
-
-    /**
      * @return bool
      */
     public function isValid(): bool
@@ -299,6 +295,7 @@ class Validator
     }
 
     /**
+     * @param string $message
      * @return array
      */
     public function sendSuccess(string $message): array
@@ -307,7 +304,7 @@ class Validator
     }
 
     /**
-     * Ajoute Une erreur
+     * Add error
      * @param string $key
      * @param string $rule
      * @param array $attributes
@@ -327,5 +324,13 @@ class Validator
             return $this->params[$key];
         }
         return null;
+    }
+
+    /**
+     * @return ValidationError[]
+     */
+    public function getErrors(): array
+    {
+        return $this->errors;
     }
 }

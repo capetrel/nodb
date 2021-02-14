@@ -18,6 +18,7 @@ class Upload
     }
 
     /**
+     * Manage uploaded file
      * @param UploadedFileInterface $file
      * @param null|string $oldFile
      * @param null|string $filename
@@ -37,7 +38,6 @@ class Upload
                 mkdir($dirname, 777, true);
             }
             $file->moveTo($targetPath);
-            $this->generateFormats($targetPath);
             return pathinfo($targetPath)['basename'];
         }
         return null;

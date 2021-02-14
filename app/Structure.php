@@ -11,11 +11,20 @@ class Structure // extends Page
 
     private array $elementsName;
 
+    /**
+     * Structure constructor. The name of the structural elements in an array
+     * @param array $elementsName
+     */
     public function __construct(array $elementsName)
     {
         $this->elementsName = $elementsName;
     }
 
+    /**
+     * Get structural elements define in the YAML file
+     * @param RegexIterator $structures
+     * @return array
+     */
     public function getStructureElements(RegexIterator $structures): array {
         $commonElements = [];
         foreach ($structures as $element) {
@@ -26,12 +35,6 @@ class Structure // extends Page
                     $commonElements[$name] = $structureElement->$name;
                 }
             }
-            /*if(!is_null($structureElement->menus)) {
-                $commonElements['menus'] = $structureElement->menus;
-            }
-            if(!is_null($structureElement->blocs)) {
-                $commonElements['blocs'] = $structureElement->blocs;
-            }*/
         }
         return $commonElements;
 

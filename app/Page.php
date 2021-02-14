@@ -19,11 +19,11 @@ class Page
     }
 
     /**
-     * Méthode magique pour ne pas avoir à utiliser les getter : $page->get('property'), mais : page->property
-     * @param $property
-     * @return mixed
+     * Magic method to not have to use getter: $page->get('property'), mais : page->property
+     * @param string $property
+     * @return mixed string|array|null
      */
-    public function __get($property)
+    public function __get(string $property)
     {
         if(!property_exists($this, $property)) {
             try {
@@ -38,12 +38,11 @@ class Page
     }
 
     /**
-     * Retourne le contenu de la propriété si elle existe
-     * @param $key
-     * @return mixed
-     * @throws \Exception
+     * Returns the property's content if it exists
+     * @param string $key
+     * @return mixed string|array|null
      */
-    public function get($key)
+    public function get(string $key)
     {
         if(is_null($this->parsedData)) {
             $this->parsedData = (new FrontMatter())->parse(file_get_contents($this->path));
@@ -65,8 +64,8 @@ class Page
     }
 
     /**
-     * Convertir un chemin de fichier en URL
-     * @return string L'url qui correspond au fichier yaml
+     * Convert file path to URL
+     * @return string L'URL of the YAML file
      */
     public function getUrl(): string
     {
@@ -77,7 +76,13 @@ class Page
         return $path;
     }
 
-    public function render(array $structure = null, array $result = null)
+    /**
+     * Render the Blade view corresponding to the layout defined in the YAML file or the default view
+     * @param array|null $structure Page's structural elements
+     * @param array|null $result Data posted if there is any
+     * @return string
+     */
+    public function render(array $structure = null, array $result = null): string
     {
         $page = $this;
         if(is_null($page->layout)) {
@@ -87,17 +92,25 @@ class Page
         }
 
         $blade = new Blade(VIEWS_PATH, BASE_PATH . DIRECTORY_SEPARATOR. 'cache');
-        return $blade->render('pages.'.$layout, compact('page', 'structure','result'));
+        return $blade->render('pages.'.$layout, compact('page', 'structure', 'result'));
     }
 
-    private function parseMarkdown ($content) {
+    /**
+     * @param string $content The Markdown to convert
+     * @return string HTML content
+     */
+    private function parseMarkdown (string $content): string
+    {
         $parser = new GithubMarkdown();
         $parser->enableNewlines = true;
         return $parser->parse($content);
     }
 
-
-    private function parseHtml ($content) {
+    /**
+     * @param string $content HTML content
+     * @return string HTML content
+     */
+    private function parseHtml (string $content): string {
         return $content;
     }
 

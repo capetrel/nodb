@@ -5,6 +5,7 @@ namespace App\Validation;
 
 
 use GuzzleHttp\Psr7\Response;
+use Slim\Flash\Messages;
 
 class ValidateForm
 {
@@ -18,6 +19,10 @@ class ValidateForm
         $this->url = $url;
     }
 
+    /**
+     * Validate form's data. if valid send mail, else return errors
+     * @return ValidationError[]|Response|string[]
+     */
     public function validate()
     {
 
@@ -38,8 +43,9 @@ class ValidateForm
                 'X-Mailer' => 'PHP/' . phpversion()
             ];
             mail($to, $subject, $message, $headers);
-            $flash = new \Slim\Flash\Messages();
-            $flash->addMessage('success', 'Merci pour votre email');
+            $succes = $validator->sendSuccess('Merci pour votre email');
+            $flash = new Messages();
+            $flash->addMessage('success', $succes['success']);
             return new Response(302, ['Location' => $this->url]);
         } else {
             return $validator->getErrors();

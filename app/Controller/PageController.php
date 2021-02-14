@@ -15,12 +15,24 @@ class PageController
     private Page $page;
     private array $commonElements;
 
+    /**
+     * PageController constructor. Need the page and the page's structural elements.
+     * @param Page $page
+     * @param array $commonElements
+     */
     public function __construct(Page $page, array $commonElements)
     {
         $this->page = $page;
         $this->commonElements = $commonElements;
     }
 
+    /**
+     * Magiq method to return the response
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @param array $args
+     * @return ResponseInterface
+     */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         require APP_PATH . DIRECTORY_SEPARATOR . 'Utils' . DIRECTORY_SEPARATOR .'view_helpers.php';
