@@ -115,12 +115,12 @@ Il est évidemment possible d'utiliser n'importe qu'elle autre outils de build.
 
 
 ## Helpers
-Les fonctions du fichier /app/helpers.php sont disponible dans les pages, ne pas hésiter à en créer selon les besoins du projet.
+Les fonctions du fichier /app/view_helpers.php seront disponible uniquemtn dans les pages (view), ne pas hésiter à en créer selon les besoins du projet.
 
 ## TODO
-- [x] Utiliser plutôt Slim 4
+- [x] Utiliser Slim 4
 - [x] Intégrer un formulaire de contact basique
-- [x] Gestion des menus
-- [x] Désactiver le message flash automatiquement
+- [x] Gestion des menus et des éléments de structure
+- [x] Désactiver le message flash automatiquement ou avec la croix
 - [x] Générer un sitemap automatiquement ? Pour des petits sites ce n'est pas indispensable, le faire manuellement n'est pas si long.
-- [x] Mettre en place redirection 404 et debug
+- [x] Mettre en place la redirection 404 et le debug
