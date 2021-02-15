@@ -3,6 +3,7 @@
 @import "elements";
 @import "form";
 @import "menu";
+@import "portfolio";
 
 body, html {
   margin:0;
@@ -62,6 +63,7 @@ header {
     padding: $space1 0;
   }
 }
+
 .works {
   display: flex;
   justify-content: center;
@@ -73,6 +75,7 @@ header {
     padding: $space1;
   }
 }
+
 .col-2 {
   display: flex;
   justify-content: space-between;

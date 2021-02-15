@@ -123,6 +123,27 @@ nav.footer-menu ul a:hover {
   color: #e87b1c;
 }
 
+.portfolios {
+  padding: 20px 0;
+}
+.portfolios .item {
+  display: flex;
+  padding: 20px 0;
+}
+.portfolios .item .item-image {
+  margin-right: 20px;
+}
+.portfolios .item .item-body h3 {
+  margin: 0 0 20px 0;
+}
+.portfolios .item .item-body .tag {
+  margin: 0 0 10px 0;
+  font-size: 12px;
+}
+.portfolios .item .item-body a {
+  text-decoration: underline;
+}
+
 body, html {
   margin: 0;
   padding: 0;

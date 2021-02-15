@@ -21,3 +21,24 @@ function setActiveItem( string $link) {
     }
     return '';
 }
+
+function filterContentByTag(array $contents, string $tag, string $key = 'tag'): array {
+    return array_filter($contents, function($item) use ($key, $tag) {
+        if(isset($item[$key][$tag])) {
+            return $item;
+        }
+        return null;
+    });
+}
+
+function setTagsForInput(array $contents, string $tag): array {
+    $categories = [];
+    foreach($contents as $item) {
+        foreach ($item[$tag] as $key => $name) {
+            if(!in_array($key, $item[$tag])) {
+                $categories[$key] = $name;
+            }
+        }
+    }
+    return $categories;
+}
