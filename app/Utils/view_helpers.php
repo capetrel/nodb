@@ -2,7 +2,8 @@
 
 function asset(string $path) {
     global $app;
-    return $app->getBasePath() . '/' . trim($path, '/');
+    $root = getEnvValue('DOC_ROOT');
+    return $app->getBasePath() . $root . trim($path, '/');
 }
 
 function getEnvValue($key) {
