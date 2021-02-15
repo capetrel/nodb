@@ -7,7 +7,7 @@ menus:
       title: Voir la page
 
     Clients:
-      link:
+      link: /clients
       submenu:
         Client 1:
           link: /clients/client-1
@@ -15,12 +15,9 @@ menus:
           title: Voir la page
 
     Portfolio:
-      link:
-      submenu:
-        Projet 1:
-          link: /portfolio/projet-1
-          target: _self
-          title: Voir la page
+      link: /portfolios
+      target: _self
+      title: Voir la page
 
     Contact:
       link: /contact

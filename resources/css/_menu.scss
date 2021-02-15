@@ -52,6 +52,9 @@ nav {
       }
     }
   }
+  .active {
+    text-decoration: underline;
+  }
 }
 nav.footer-menu {
   background-color: transparent;
